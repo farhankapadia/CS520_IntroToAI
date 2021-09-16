@@ -17,8 +17,8 @@ def pop(fringe):
 def get_coordinates(node):
     #assuming nodes are of the form "A1", "B3", etc.
     #extracting coordinates to work for a matrix in the form (0, 0), (1, 2), etc.
-    x = ord(current[0]) - 65
-    y = int(current[1]) - 1
+    x = ord(node[0]) - 65
+    y = int(node[1]) - 1
     return x, y
     
 def get_heuristic(current, goal):
