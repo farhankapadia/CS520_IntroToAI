@@ -12,9 +12,8 @@ def push(fringe, node, value):
 
 def pop(fringe):
     first = list(fringe)[0]
-    val = fringe[first]
     current = fringe.pop(first)
-    return fringe, current, val
+    return fringe, first, current
 
 def get_coordinates(node):
     #assuming nodes are of the form "A1", "B3", etc.
@@ -69,6 +68,7 @@ def a_star(initial_grid, fringe, start, goal, path, visited, blocked):
                     fringe = push(fringe, label, f)
                 else:
                     blocked.append(label)
+                    
             if check_bounds(x1+1, y1, initial_grid):
                 label = get_label(x1+1, y1)
                 h = get_heuristic(label, goal)
@@ -79,6 +79,7 @@ def a_star(initial_grid, fringe, start, goal, path, visited, blocked):
                     fringe = push(fringe, label, f)
                 else:
                     blocked.append(label)
+                    
             if check_bounds(x1, y1-1, initial_grid):
                 label = get_label(x1, y1-1)
                 h = get_heuristic(label, goal)
@@ -89,6 +90,7 @@ def a_star(initial_grid, fringe, start, goal, path, visited, blocked):
                     fringe = push(fringe, label, f)
                 else:
                     blocked.append(label)
+                    
             if check_bounds(x1, y1+1, initial_grid):
                 label = get_label(x1, y1+1)
                 h = get_heuristic(label, goal)
