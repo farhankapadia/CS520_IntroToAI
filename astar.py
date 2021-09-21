@@ -12,8 +12,9 @@ def push(fringe, node, value):
 
 def pop(fringe):
     first = list(fringe)[0]
+    val = fringe[first]
     current = fringe.pop(first)
-    return fringe, current
+    return fringe, current, val
 
 def get_coordinates(node):
     #assuming nodes are of the form "A1", "B3", etc.
@@ -44,18 +45,66 @@ def get_heuristic(current, goal, heu=1):
         heuristic = max(abs(x1-x2), abs(y1-y2))
     return heuristic
     
-def a_star(initial_grid, agent_grid, fringe, heuristic, start, goal):
-    path = []
+
+def a_star(initial_grid, fringe, start, goal, path, visited, blocked):
     x2, y2 = get_coordinates(goal)
     fringe = push(fringe, start, 0)
-    path.append(start)
     while len(fringe) > 0:
-        fringe, current = pop()
+        block_finder = {}
+        inf_finder = {}
+        fringe, current, g = pop()
+        path.append(current)
+        visited.append(current)
         if current == goal:
-            pass #add code here later
+            return True
         else:
             x1, y1 = get_coordinates(current)
-            if check_bounds(x1-1, y):
-                agent_grid[][]
-    
-    
+            if check_bounds(x1-1, y1, initial_grid):
+                label = get_label(x1-1, y1)
+                h = get_heuristic(label, goal)
+                f = g + initial_grid[x1-1][y1] + h
+                block_finder[label] = g + h + 1  
+                inf_finder[label] = f
+                if not math.isinf(initial_grid[x1-1][y1]):
+                    fringe = push(fringe, label, f)
+                else:
+                    blocked.append(label)
+            if check_bounds(x1+1, y1, initial_grid):
+                label = get_label(x1+1, y1)
+                h = get_heuristic(label, goal)
+                f = g + initial_grid[x1+1][y1] + h
+                block_finder[label] = g + h + 1
+                inf_finder[label] = f
+                if not math.isinf(initial_grid[x1+1][y1]):
+                    fringe = push(fringe, label, f)
+                else:
+                    blocked.append(label)
+            if check_bounds(x1, y1-1, initial_grid):
+                label = get_label(x1, y1-1)
+                h = get_heuristic(label, goal)
+                f = g + initial_grid[x1][y1-1] + h
+                block_finder[label] = g + h + 1
+                inf_finder[label] = f
+                if not math.isinf(initial_grid[x1][y1-1]):
+                    fringe = push(fringe, label, f)
+                else:
+                    blocked.append(label)
+            if check_bounds(x1, y1+1, initial_grid):
+                label = get_label(x1, y1+1)
+                h = get_heuristic(label, goal)
+                f = g + initial_grid[x1][y1+1] + h
+                block_finder[label] = g + h + 1
+                inf_finder[label] = f
+                if not math.isinf(initial_grid[x1][y1+1]):
+                    fringe = push(fringe, label, f)
+                else:
+                    blocked.append(label)
+                    
+            if math.isinf(inf_finder[min(block_finder, key=block_finder.get)]):
+                path.pop()
+                a_star(initial_grid, {}, path.pop(), goal, path, visited, blocked)
+                
+    return False
+            
+            
+            
