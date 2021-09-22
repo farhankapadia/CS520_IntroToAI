@@ -1,12 +1,14 @@
 import math
 import numpy as np
 
-def push(fringe, node, value):
-    if node in fringe.keys():
-        if value < fringe[node]:
-            fringe[node] = value
+def push(old_fringe, node, value):
+    if node in old_fringe.keys():
+        if value < old_fringe[node]:
+            fringe = {node:value}
+            fringe.update(old_fringe)
     else:
-        fringe[node] = value
+        fringe = {node:value}
+        fringe.update(old_fringe)
     fringe = dict(sorted(fringe.items(), key=lambda x:x[1]))
     return fringe
 
