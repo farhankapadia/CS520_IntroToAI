@@ -107,23 +107,24 @@ def a_star(initial_grid, fringe, start, goal, g=1,  path=[], visited=[], blocked
                 elif math.isinf(initial_grid[x1][y1+1]):
                     blocked.append(label)
                     
-            if math.isinf(inf_finder[min(block_finder, key=block_finder.get)]):
-                path.pop()
-                return a_star(initial_grid, {}, path.pop(), goal, g-1, path, visited, blocked)
-            else:
-                g += 1
+            if current != start:
+                if math.isinf(inf_finder[min(block_finder, key=block_finder.get)]):
+                    path.pop()
+                    return a_star(initial_grid, {}, path.pop(), goal, g-1, path, visited, blocked)
+                else:
+                    g += 1
         print(fringe)
                 
     return False
             
 
 #using a test grid for now            
-grid = np.array([[1, 1, math.inf, math.inf, 1],
-                 [1, math.inf, math.inf, math.inf, 1],
-                 [1, 1, 1, 1, 1],
-                 [1, 1, 1, 1, 1],
-                 [1, 1, 1, 1, 1]])
-start = "A1"
+grid = np.array([[1, 1, 1, 1, 1],
+                 [1, 1, math.inf, 1, 1],
+                 [1, 1, math.inf, math.inf, 1],
+                 [1, 1, math.inf, math.inf, 1],
+                 [1, 1, 1, math.inf, 1]])
+start = "E3"
 goal = "E5"
 
 print(a_star(grid, {}, start, goal))
