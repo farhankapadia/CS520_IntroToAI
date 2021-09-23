@@ -108,7 +108,7 @@ def a_star(initial_grid, fringe, start, goal, g=1,  path=[], visited=[], blocked
                     blocked.append(label)
                     
             if current != start:
-                if math.isinf(inf_finder[min(block_finder, key=block_finder.get)]):
+                if math.isinf(inf_finder[min(block_finder, key=block_finder.get)]) and sum(value == block_finder[min(block_finder, key=block_finder.get)] for value in block_finder.values())==1:
                     path.pop()
                     return a_star(initial_grid, {}, path.pop(), goal, g-1, path, visited, blocked)
                 else:
