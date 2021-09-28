@@ -123,7 +123,7 @@ initial_grid = np.array([[1., 1, 1., 1, 1.],
                          [1, math.inf, math.inf, math.inf, 1.],
                          [1, math.inf, math.inf, 1, 1],
                          [1, math.inf, math.inf, 1, math.inf],
-                         [1, 1, 1, 1, 1]])
+                         [1, 1, 1, math.inf, 1]])
 
 agent_grid = np.array([[1., 1, 1, 1, 1],
                          [1, 1, 1, 1, 1],
