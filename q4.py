@@ -26,3 +26,5 @@ plt.ylabel('Solvability')
 sns.scatterplot(x=p, y=prob)
 sns.lineplot(x=p, y=prob, color='red')
 plt.show()
+
+#p0= 0.23
