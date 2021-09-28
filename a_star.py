@@ -1,7 +1,10 @@
 import math
 import queue
 import numpy as np
+from gridworld import get_grid
 
+initial_grid, agent_grid = get_grid()
+print(initial_grid)
 
 def check_bounds(x, y, initial_grid):
     if x>=0 and y>=0 and x<=initial_grid.shape[0]-1 and y<=initial_grid.shape[1]-1:
@@ -118,17 +121,6 @@ def execution(initial_grid, agent_grid, start, goal, path=[]):
                 return execution(initial_grid, agent_grid, path[j-1], goal, path=path)
     print(path)
      
-    
-initial_grid = np.array([[1., 1, 1., 1, 1.],
-                         [1, math.inf, math.inf, math.inf, 1.],
-                         [1, math.inf, math.inf, 1, 1],
-                         [1, math.inf, math.inf, 1, math.inf],
-                         [1, 1, 1, math.inf, 1]])
 
-agent_grid = np.array([[1., 1, 1, 1, 1],
-                         [1, 1, 1, 1, 1],
-                         [1, 1, 1, 1, 1],
-                         [1, 1, 1, 1, 1],
-                         [1, 1, 1, 1, 1]])
-        
-execution(initial_grid, agent_grid, (0, 0), (4, 4))
+    
+execution(initial_grid, agent_grid, (0,0), (initial_grid.shape[0]-1, initial_grid.shape[1]-1))
