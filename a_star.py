@@ -1,9 +1,9 @@
 import math
 import queue
-from gridworld import get_grid
+#from gridworld import get_grid
 
-def main():
-    initial_grid, agent_grid = get_grid()
+def main(initial_grid, agent_grid):
+    #initial_grid, agent_grid = get_grid()
     print(initial_grid)
     
     def check_bounds(x, y, initial_grid):
@@ -90,7 +90,7 @@ def main():
         new_path = []
         if len(parent) == 0:
             print('No path')
-            return
+            return []
         else:
             new_path.append(goal)
             value = parent[goal]

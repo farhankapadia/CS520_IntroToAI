@@ -2,9 +2,9 @@ import numpy as np
 import math
 import random
 
-def get_grid():
-    dim = int(input("Enter dimensions of the grid: "))
-    p = float(input('Enter probability of blocked cells: '))
+def get_grid(dim, p):
+    #dim = int(input("Enter dimensions of the grid: "))
+    #p = float(input('Enter probability of blocked cells: '))
     
     agent_grid = np.ones((dim,dim))
     k = int(dim * dim * p)

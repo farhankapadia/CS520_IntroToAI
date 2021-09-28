@@ -1,7 +1,9 @@
 from a_star import main
+from gridworld import get_grid
 
+initial_grid, agent_grid = get_grid(10, 0.2)
 
-grid, astar = main()
+grid, astar = main(initial_grid, agent_grid)
 print(grid)
 
 try:
