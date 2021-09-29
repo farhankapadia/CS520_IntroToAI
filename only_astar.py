@@ -27,30 +27,32 @@ def get_coordinates(node):
     y = node[1]
     return x, y
 
-def a_star(agent_grid, start, goal):
+def a_star(agent_grid, start, goal, heu):
     q = queue.PriorityQueue(maxsize=0)
+    nodes_processed = 0
     parent = {}
     visited = []
     g = {}
     x1, y1 = get_coordinates(start)
-    h = get_heuristic(goal, x1, y1)
+    h = get_heuristic(goal, x1, y1, heu)
     g[start] = 0
     f = g[start] + h
     q.put((f, start))
     visited.append(start)
     while not q.empty():
         current = q.get()[1]
+        nodes_processed += 1
         x1, y1 = get_coordinates(current)
         
         if current == goal:
-            return parent
+            return parent, nodes_processed
         
         else:
             if check_bounds(x1+1, y1, agent_grid) and not math.isinf(agent_grid[x1+1][y1]) and (x1+1, y1) not in visited:
                 parent[(x1+1, y1)] = current
                 visited.append((x1+1, y1))
                 g[(x1+1, y1)] = g[current] + 1
-                h = get_heuristic(goal, x1+1, y1)
+                h = get_heuristic(goal, x1+1, y1, heu)
                 f = g[(x1+1, y1)] + h
                 q.put((f, (x1+1, y1)))
                 
@@ -58,7 +60,7 @@ def a_star(agent_grid, start, goal):
                 parent[(x1, y1+1)] = current
                 visited.append((x1, y1+1))
                 g[(x1, y1+1)] = g[current] + 1
-                h = get_heuristic(goal, x1, y1+1)
+                h = get_heuristic(goal, x1, y1+1, heu)
                 f = g[(x1, y1+1)] + h
                 q.put((f, (x1, y1+1)))
                 
@@ -66,7 +68,7 @@ def a_star(agent_grid, start, goal):
                 parent[(x1-1, y1)] = current
                 visited.append((x1-1, y1))
                 g[(x1-1, y1)] = g[current] + 1
-                h = get_heuristic(goal, x1-1, y1)
+                h = get_heuristic(goal, x1-1, y1, heu)
                 f = g[(x1-1, y1)] + h
                 q.put((f, (x1-1, y1)))
                 
@@ -74,8 +76,8 @@ def a_star(agent_grid, start, goal):
                 parent[(x1, y1-1)] = current
                 visited.append((x1, y1-1))
                 g[(x1, y1-1)] = g[current] + 1
-                h = get_heuristic(goal, x1, y1-1)
+                h = get_heuristic(goal, x1, y1-1, heu)
                 f = g[(x1, y1-1)] + h
                 q.put((f, (x1, y1-1)))
             
-    return {}
+    return {}, nodes_processed

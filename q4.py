@@ -12,7 +12,7 @@ for i in p:
     total = 0
     for j in range(30):
         initial_grid, agent_grid = get_grid(101, i)
-        flag = a_star(initial_grid, (0, 0), (initial_grid.shape[0]-1, initial_grid.shape[1]-1))
+        flag, nodes = a_star(initial_grid, (0, 0), (initial_grid.shape[0]-1, initial_grid.shape[1]-1), 1)
         if len(flag) == 0:
             continue
         else:
