@@ -32,6 +32,7 @@ def main(initial_grid, agent_grid):
         y = node[1]
         return x, y
     
+    global nodes_processed
     nodes_processed = 0
     def a_star(agent_grid, start, goal):
         q = queue.PriorityQueue(maxsize=0)
@@ -121,7 +122,6 @@ def main(initial_grid, agent_grid):
                     agent_grid[x][y] = math.inf
                     for k in range(j, len(path)):
                         path.pop()
-                    path.pop()
                         
                     return execution(initial_grid, agent_grid, path[j-1], goal, path=path)
         print(path)
