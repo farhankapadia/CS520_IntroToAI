@@ -32,8 +32,10 @@ def main(initial_grid, agent_grid):
         y = node[1]
         return x, y
     
+    nodes_processed = 0
     def a_star(agent_grid, start, goal):
         q = queue.PriorityQueue(maxsize=0)
+        global nodes_processed
         parent = {}
         visited = []
         g = {}
@@ -45,6 +47,7 @@ def main(initial_grid, agent_grid):
         visited.append(start)
         while not q.empty():
             current = q.get()[1]
+            nodes_processed += 1
             x1, y1 = get_coordinates(current)
             
             if current == goal:
@@ -87,6 +90,7 @@ def main(initial_grid, agent_grid):
     
     def execution(initial_grid, agent_grid, start, goal, path=[]):
         parent = a_star(agent_grid, start, goal) 
+        global nodes_processed
         new_path = []
         if len(parent) == 0:
             print('No path')
@@ -117,10 +121,11 @@ def main(initial_grid, agent_grid):
                     agent_grid[x][y] = math.inf
                     for k in range(j, len(path)):
                         path.pop()
+                    path.pop()
                         
                     return execution(initial_grid, agent_grid, path[j-1], goal, path=path)
         print(path)
-        return agent_grid
+        return agent_grid, path, nodes_processed
          
     
         

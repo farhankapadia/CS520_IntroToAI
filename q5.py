@@ -40,6 +40,7 @@ p = [str(i) for i in p]
 raw_data = {'x':p, 'y':avg, 'category':labels}
 
 plt.xlabel('Distances')
+plt.xticks(rotation=90)
 plt.ylabel('No. of nodes processed')
 
 sns.barplot(x='x', y='y', hue='category', data=raw_data)
