@@ -129,7 +129,7 @@ def main(initial_grid, agent_grid):
          
     
         
-    new_agent_grid = execution(initial_grid, agent_grid, (0,0), (initial_grid.shape[0]-1, initial_grid.shape[1]-1))
-    return new_agent_grid, a_star
+    new_agent_grid, path, nodes_processed = execution(initial_grid, agent_grid, (0,0), (initial_grid.shape[0]-1, initial_grid.shape[1]-1))
+    return new_agent_grid, a_star, nodes_processed, path
 
 #grid, astar = main()

@@ -3,7 +3,7 @@ from gridworld import get_grid
 
 initial_grid, agent_grid = get_grid(10, 0.2)
 
-grid, astar, nodes_processed = main(initial_grid, agent_grid)
+grid, astar, nodes_processed, path = main(initial_grid, agent_grid)
 print(grid)
 
 try:
