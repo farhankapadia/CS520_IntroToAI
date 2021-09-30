@@ -95,7 +95,7 @@ def main(initial_grid, agent_grid):
         new_path = []
         if len(parent) == 0:
             print('No path')
-            return []
+            return [], [], 0
         else:
             new_path.append(goal)
             value = parent[goal]
