@@ -4,6 +4,7 @@ from only_astar import a_star
 from a_star import main
 import matplotlib.pyplot as plt
 import seaborn as sns
+import pandas as pd
 
 p = np.arange(0.0, 0.24, 0.01)
 print(p)
@@ -58,3 +59,11 @@ for i in p:
     avg3.append(avg_s_path)
     t_nodes.append(nodes_processed)
     
+
+
+dict = {'avg_t': avg_t_path, 'avg_d': avg_d_path , 'avg_s': avg_s_path, 't_nodes':t_nodes, 'p':p}  
+       
+df = pd.DataFrame(dict) 
+    
+# saving the dataframe 
+df.to_csv('q6.csv') 

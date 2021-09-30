@@ -10,6 +10,7 @@ print(p)
 avg = []
 
 for i in p:
+    print(i)
     nodes_m = []
     nodes_e = []
     nodes_c = []
