@@ -36,7 +36,7 @@ def main(initial_grid, agent_grid, w, heu):
     global nodes_processed
     nodes_processed = 0
     def a_star(agent_grid, start, goal):
-        start = timeit.default_timer()
+        start_t = timeit.default_timer()
         q = queue.PriorityQueue(maxsize=0)
         global nodes_processed
         parent = {}
@@ -55,7 +55,7 @@ def main(initial_grid, agent_grid, w, heu):
             
             if current == goal:
                 stop = timeit.default_timer()
-                time = stop - start
+                time = stop - start_t
                 return parent, time
             
             else:
@@ -91,10 +91,11 @@ def main(initial_grid, agent_grid, w, heu):
                     f = g[(x1, y1-1)] + w * h
                     q.put((f, (x1, y1-1)))
         stop = timeit.default_timer()
-        time = stop - start
+        time = stop - start_t
         return {}, time
     
     def execution(initial_grid, agent_grid, start, goal, path=[]):
+        start_t = timeit.default_timer()
         parent, time = a_star(agent_grid, start, goal) 
         global nodes_processed
         new_path = []
@@ -129,8 +130,9 @@ def main(initial_grid, agent_grid, w, heu):
                         path.pop()
                         
                     return execution(initial_grid, agent_grid, path[j-1], goal, path=path)
-        print(path)
-        return agent_grid, path, nodes_processed, time
+        #print(path)
+        stop_t = timeit.default_timer()
+        return agent_grid, path, nodes_processed, stop_t-start_t
          
     
         
