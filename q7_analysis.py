@@ -68,7 +68,7 @@ dict = {'avg_t': avg1, 'avg_d': avg2 , 'avg_s': avg3, 't_nodes':t_nodes, 'p':p}
 df = pd.DataFrame(dict) 
     
 # saving the dataframe 
-df.to_csv('q6.csv') 
+df.to_csv('q7.csv') 
 
 plt.xlabel('Density')
 plt.ylabel('Average Trajectory Length')

@@ -59,7 +59,7 @@ for i in p:
     avg1.append(avg_t_path)
     avg2.append(avg_d_path)
     avg3.append(avg_s_path)
-    t_nodes.append(nodes_processed)
+    t_nodes.append(nodes_processed/30)
     
 
 
