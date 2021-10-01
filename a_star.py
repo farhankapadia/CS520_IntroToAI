@@ -24,21 +24,21 @@ def main(initial_grid, agent_grid):
     
     def check_bounds(x, y, initial_grid):
         '''
-        
+        this function checks if the cell under consideration is within the limits of the grid or not
 
         Parameters
         ----------
-        x : TYPE
-            DESCRIPTION.
-        y : TYPE
-            DESCRIPTION.
-        initial_grid : TYPE
-            DESCRIPTION.
+        x : TYPE: integer
+            DESCRIPTION: the x coordinate of the cell
+        y : TYPE: integer
+            DESCRIPTION: the y coordinate of the cell
+        initial_grid : TYPE: 2D numpy array
+            DESCRIPTION: the initial grid
 
         Returns
         -------
         bool
-            DESCRIPTION.
+            DESCRIPTION: returns True is cell is in bounds and False otherwise
 
         '''
         if x>=0 and y>=0 and x<=initial_grid.shape[0]-1 and y<=initial_grid.shape[1]-1:
@@ -46,6 +46,26 @@ def main(initial_grid, agent_grid):
         return False
     
     def get_heuristic(goal, x1, y1, heu=1):
+        '''
+        this function calculates the heuristic from the node under consideration to the goal node
+
+        Parameters
+        ----------
+        goal : TYPE: tuple
+            DESCRIPTION: a tuple containing the coordinates of the goal node
+        x1 : TYPE: integer
+            DESCRIPTION: the x coordinate of the current cell under consideration
+        y1 : TYPE: integer
+            DESCRIPTION: the y coordinate of the current cell under consideration
+        heu : TYPE, optional: integer
+            DESCRIPTION. The default is 1. 1 represents Manhattan, 2- Euclidean and 3- Chebyshev
+
+        Returns
+        -------
+        heuristic : TYPE: integer
+            DESCRIPTION. returns the heuristic value after computation
+
+        '''
         x2 = goal[0]
         y2 = goal[1]
         
@@ -62,6 +82,22 @@ def main(initial_grid, agent_grid):
         return heuristic
     
     def get_coordinates(node):
+        '''
+        this function extracts the coordinates given a tuple of the form (x,y)
+
+        Parameters
+        ----------
+        node : TYPE: tuple
+            DESCRIPTION: a tuple containing the coordinates of the cell
+
+        Returns
+        -------
+        x : TYPE: integer
+            DESCRIPTION. The x coordinate of the cell
+        y : TYPE: integer
+            DESCRIPTION. The y coordinate of the cell
+
+        '''
         x = node[0]
         y = node[1]
         return x, y
@@ -69,6 +105,24 @@ def main(initial_grid, agent_grid):
     global nodes_processed
     nodes_processed = 0
     def a_star(agent_grid, start, goal):
+        '''
+        this function carries out the planning phase by running the A* algorithm 
+
+        Parameters
+        ----------
+        agent_grid : TYPE: 2D numpy array
+            DESCRIPTION. The grid that is updated by the agent as it traverses through the gridworld
+        start : TYPE: tuple
+            DESCRIPTION. Coordinates of the start node
+        goal : TYPE: tuple
+            DESCRIPTION. Coordinates of the goal node
+
+        Returns
+        -------
+        TYPE: dictionary
+            DESCRIPTION. Returns the parent dictionary to the execution phase so the path can be extracted from it
+
+        '''
         q = queue.PriorityQueue(maxsize=0)
         global nodes_processed
         parent = {}
@@ -124,6 +178,32 @@ def main(initial_grid, agent_grid):
         return {}
     
     def execution(initial_grid, agent_grid, start, goal, path=[]):
+        '''
+        this function carries out the execution phase using repeated A*
+
+        Parameters
+        ----------
+        initial_grid : TYPE: 2D numpy array
+            DESCRIPTION. This is the initial grid to be traversed
+        agent_grid : TYPE: 2D numpy array
+            DESCRIPTION. The grid that is updated by the agent as it traverses through the gridworld
+        start : TYPE: tuple
+            DESCRIPTION. Coordinates of the start node
+        goal : TYPE: tuple
+            DESCRIPTION. Coordinates of the goal node
+        path : TYPE, optional: list
+            DESCRIPTION. The default is []. The path from the start node to the goal node
+
+        Returns
+        -------
+        TYPE: 2D numpy array
+            DESCRIPTION. Returns the agent grid with updated knowledge
+        TYPE: list
+            DESCRIPTION. Returns the path from the start node to the goal node
+        TYPE: integer
+            DESCRIPTION. Returns the number of nodes processed during the execution of the entire A* algorithm
+
+        '''
         parent = a_star(agent_grid, start, goal) 
         global nodes_processed
         new_path = []
